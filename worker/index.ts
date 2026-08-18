@@ -2,6 +2,8 @@ interface Env{ASSETS:{fetch(request:Request):Promise<Response>};EMAIL?:{send(mes
 const json=(body:unknown,status=200,extra:Record<string,string>={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff',...extra}});
 export default{async fetch(request:Request,env:Env):Promise<Response>{
  const url=new URL(request.url);
+ const redirects:Record<string,string>={'/services/home-lockout/':'/house-lockout/','/services/residential-rekeying/':'/residential-rekeying/','/services/lock-repair/':'/lock-repair/','/services/landlord-rekeying/':'/landlord-rekeying/','/services/commercial-lock-service/':'/commercial-lockout/','/services/car-lockout/':'/car-lockout/','/vehicle-lockout/':'/car-lockout/','/keys-locked-in-car/':'/car-lockout/','/emergency-vehicle-entry/':'/car-lockout/'};
+ if(redirects[url.pathname])return Response.redirect(new URL(redirects[url.pathname],url),301);
  if(url.pathname!='/api/leads'){const asset=await env.ASSETS.fetch(request);const response=new Response(asset.body,asset);response.headers.set('x-content-type-options','nosniff');response.headers.set('referrer-policy','strict-origin-when-cross-origin');if(url.hostname!=='danielslockkey.com')response.headers.set('x-robots-tag','noindex,nofollow');return response}
  if(request.method!=='POST')return json({error:'Method not allowed'},405,{allow:'POST'});
  if(request.headers.get('origin')!==(env.ALLOWED_ORIGIN||url.origin))return json({error:'Origin not allowed'},403);

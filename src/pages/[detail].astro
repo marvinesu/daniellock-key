@@ -1,0 +1,6 @@
+---
+import DetailServicePage from '../components/DetailServicePage.astro';import {residentialDetails,commercialDetails} from '../data/serviceArchitecture';
+export function getStaticPaths(){return [...residentialDetails.map(service=>({params:{detail:service.slug},props:{service,pillar:'residential'}})),...commercialDetails.map(service=>({params:{detail:service.slug},props:{service,pillar:'commercial'}}))]}
+const {service,pillar}=Astro.props;
+---
+<DetailServicePage {service} {pillar}/>

@@ -1,7 +1,10 @@
-import {describe,expect,it} from 'vitest';import {readFileSync,existsSync,statSync} from 'node:fs';import {services,site} from '../src/data/site';
+import {describe,expect,it} from 'vitest';import {readFileSync,existsSync,statSync} from 'node:fs';import {services,site} from '../src/data/site';import {residentialDetails,commercialDetails} from '../src/data/serviceArchitecture';
 const read=(path:string)=>readFileSync(new URL(`../${path}`,import.meta.url),'utf8');
 describe("Daniel's Lock & Key release contract",()=>{
  it('publishes six carefully scoped services',()=>expect(services).toHaveLength(6));
+ it('publishes problem-specific residential and selected commercial routes',()=>{expect(residentialDetails).toHaveLength(9);expect(commercialDetails).toHaveLength(5);const dynamic=read('src/pages/[detail].astro');expect(dynamic).toContain('residentialDetails');expect(dynamic).toContain('commercialDetails')});
+ it('ships canonical hubs, vehicle aliases, and one qualified location page',()=>{['all-services.astro','residential.astro','commercial.astro','car-lockout.astro','resources.astro','hollywood.astro'].forEach(p=>expect(existsSync(new URL(`../src/pages/${p}`,import.meta.url))).toBe(true));const worker=read('worker/index.ts');['/vehicle-lockout/','/keys-locked-in-car/','/emergency-vehicle-entry/'].forEach(route=>expect(worker).toContain(route))});
+ it('uses an attributed local icon subset',()=>{expect(read('src/layouts/BaseLayout.astro')).toContain('UIcons by Flaticon');expect(read('website-plan/icon-license-ledger.md')).toContain('Flaticon');expect(statSync(new URL('../public/fonts/flaticon-locksmith.woff2',import.meta.url)).size).toBeLessThan(10000)});
  it('uses the verified public license number',()=>expect(site.license).toContain('LCO 8506'));
  it('does not publish a street address',()=>expect(read('src/data/site.ts')).not.toMatch(/\d{3,5}\s+[A-Z][a-z]+\s+(Street|St|Avenue|Ave|Boulevard|Blvd)/));
  it('includes the reference architecture',()=>['about.astro','guides/index.astro','guides/proof-of-authorization.astro','guides/how-locksmith-service-works.astro','guides/lockout-checklist.astro'].forEach(p=>expect(existsSync(new URL(`../src/pages/${p}`,import.meta.url))).toBe(true)));
