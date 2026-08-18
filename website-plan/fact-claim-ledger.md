@@ -12,4 +12,4 @@
 
 ## Prior-site recovery — 2026-08-18
 
-The previous website publishes `6220 Selma Ave, Apt 551, Los Angeles, CA 90028`. Present it only as a prior-site published address for a mobile service and say “call before visiting.” Social links recovered: Facebook, Instagram, YouTube.
+The operational apartment address is not published. The website presents Daniel's Lock & Key as an owner-operated mobile service-area business. Social links recovered: Facebook, Instagram, YouTube.

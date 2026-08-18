@@ -4,7 +4,7 @@
 - Source: https://www.flaticon.com/uicons
 - Package reference: `@flaticon/flaticon-uicons` 3.3.1
 - License: Flaticon license; free use requires attribution
-- Attribution shown: “UIcons by Flaticon” in the global site footer
+- Status: removed from the production interface and no longer imported by the site shell
 - Local files: `public/fonts/flaticon-locksmith.woff2`, `src/styles/icons.css`
 - Accessibility: decorative icons use `aria-hidden="true"`; labels remain visible text
 - Bundle treatment: a small local subset is used instead of the full font package
