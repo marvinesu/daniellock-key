@@ -1,0 +1,4 @@
+---
+import LocationPage from '../../components/LocationPage.astro';import {locations} from '../../data/locations';export function getStaticPaths(){return locations.map(location=>({params:{slug:location.slug},props:{location}}))}const {location}=Astro.props;
+---
+<LocationPage {location}/>
