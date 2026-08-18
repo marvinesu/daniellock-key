@@ -1,0 +1,4 @@
+---
+import {orderedMedia} from '../data/serviceMedia';const {active=''}=Astro.props;const images=orderedMedia(active);
+---
+<section class="service-gallery-section" aria-labelledby="gallery-title"><div class="shell"><div class="gallery-heading" data-reveal><div><p class="kicker">Daniel's service gallery</p><h2 id="gallery-title">See the opening. Explain the need.</h2></div><p>Seven Hollywood-focused scenes make the service options easier to recognize before you call.</p></div><div class="service-gallery">{images.map((image,index)=><figure class:list={['service-gallery-item',{featured:index===0}]} data-reveal><picture><source media="(max-width:720px)" srcset={`/images/services/${image.key}-sm.webp`}/><img src={`/images/services/${image.key}.webp`} alt={image.alt} width="1200" height="800" loading={index?'lazy':'eager'} decoding="async"/></picture><figcaption><strong>{image.title}</strong><span>{image.caption}</span></figcaption></figure>)}</div></div></section>
