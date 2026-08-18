@@ -1,4 +1,4 @@
-export const site={name:"Daniel's Lock & Key",domain:'https://danielslockkey.com',preview:'https://daniels.webxni.com',phone:'(310) 600-2849',phoneHref:'+13106002849',market:'Hollywood',areas:['Hollywood','West Hollywood','East Hollywood','Los Feliz','Silver Lake','Central Los Angeles'],email:''} as const;
+export const site={name:"Daniel's Lock & Key",domain:'https://danielslockkey.com',preview:'https://daniels.webxni.com',phone:'(310) 600-2849',phoneHref:'+13106002849',market:'Hollywood',areas:['Hollywood','West Hollywood','East Hollywood','Los Feliz','Silver Lake','Central Los Angeles'],license:'California Locksmith Company LCO 8506',email:''} as const;
 
 export const services=[
  {slug:'home-lockout',type:'Urgent access',title:'Home Lockout Help',short:'Owner-operated help for authorized house, apartment, and condo access.',detail:'Call with the exact address and prepare identification plus proof of occupancy, ownership, or authorized access.'},

@@ -4,6 +4,7 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress{display:none}.hero-grid>div:first-child>*,.hero-art,.chat [data-reply]{animation:none!important}.assistant aside,[data-reveal]{transition-duration:.01ms!important;opacity:1!important;transform:none!important}}
 
 /* Daniel's: warm, owner-led editorial identity. */
+.hero-art{background-image:linear-gradient(180deg,transparent 55%,rgba(23,25,29,.78)),url('/images/locksmith-hero.webp')!important;background-size:cover!important;background-position:center!important}.hero-art .sun,.hero-art .door{display:none}@media(max-width:800px){.hero-art{background-image:linear-gradient(180deg,transparent 52%,rgba(23,25,29,.78)),url('/images/locksmith-mobile.webp')!important}}
 html,body{overflow-x:clip}
 @media(max-width:800px){.hero:before{display:none}}
 :root{--ink:#17191d;--paper:#f2ede4;--white:#fffaf1;--coral:#cf572f;--gold:#d8aa45;--sage:#b8aea0;--line:rgba(23,25,29,.18)}
