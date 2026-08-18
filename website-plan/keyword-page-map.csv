@@ -1,0 +1,9 @@
+url,type,primary_intent,market,conversion,status
+/,home,Hollywood locksmith,Hollywood,call,create
+/services/home-lockout/,service,home lockout Hollywood,Hollywood,call,create
+/services/residential-rekeying/,service,residential rekeying Hollywood,Hollywood,call/form,create
+/services/lock-repair/,service,lock repair Hollywood,Hollywood,call/form,create
+/services/landlord-rekeying/,service,landlord rekeying Hollywood,Hollywood,form,create
+/services/commercial-lock-service/,service,commercial locksmith Hollywood,Hollywood,call/form,create
+/services/car-lockout/,service,car lockout Hollywood,Hollywood,call,create
+/service-areas/,hub,locksmith service areas Hollywood,Central Los Angeles,call,create

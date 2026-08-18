@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';import LeadForm from '../components/LeadForm.astro';import {site} from '../data/site';
+---
+<BaseLayout title="Contact Daniel's Lock & Key | Hollywood" description="Call Daniel for an active Hollywood lockout or send a scheduled request for rekeying, repair, or selected commercial work."><section class="page-hero"><div class="shell"><p class="kicker">Talk directly with Daniel</p><h1>Tell Daniel what the lock is doing.</h1><p class="lede">For an active lockout, call <a href={`tel:${site.phoneHref}`}>{site.phone}</a>. Scheduled requests can use the form below.</p></div></section><section class="request" id="request"><div class="shell request-grid"><div><h2>What to prepare</h2><ul><li>Exact address, city, or ZIP</li><li>Home, rental, business, or passenger vehicle</li><li>Door, lock, and symptom</li><li>Proof of authorized access</li></ul></div><LeadForm/></div></section></BaseLayout>

@@ -1,0 +1,8 @@
+source,target,purpose
+/,/services/house-apartment-lockout/,urgent residential intent
+/,/services/home-rekeying/,move-in access intent
+/,/services/residential-lock-repair/,repair intent
+/,/services/car-lockout/,vehicle scope
+/,/service-areas/,coverage confirmation
+/,/contact/,scheduled request
+/service-areas/,/contact/,exact-address request

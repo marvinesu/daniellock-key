@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';import {site} from '../data/site';
+---
+<BaseLayout title="Hollywood Locksmith Service Areas | Daniel's Lock & Key" description="Service-area information for Hollywood and selected nearby Central Los Angeles communities."><section class="page-hero"><div class="shell"><p class="kicker">Exact-address confirmation</p><h1>Hollywood and selected nearby neighborhoods.</h1><p class="lede">A service area is not a storefront. Call with the exact address and requested work so coverage and current availability can be confirmed.</p></div></section><section class="section shell area-cards">{site.areas.map((area,i)=><article data-reveal><span>{String(i+1).padStart(2,'0')}</span><h2>{area}</h2><p>Lockout, rekeying, and repair requests are reviewed using the exact property location, installed hardware, and authorization.</p><a href={`tel:${site.phoneHref}`}>Call Daniel to confirm →</a></article>)}</section></BaseLayout>

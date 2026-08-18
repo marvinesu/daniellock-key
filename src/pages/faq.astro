@@ -1,0 +1,4 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';import {faqs} from '../data/site';
+---
+<BaseLayout title="Hollywood Locksmith FAQ | Daniel's Lock & Key" description="Plain answers about Hollywood lockouts, proof of access, rekeying, repairs, service areas, and vehicle-service limits."><section class="page-hero"><div class="shell"><p class="kicker">Useful before you call</p><h1>Locksmith questions, answered plainly.</h1></div></section><section class="section shell faq full"><div></div><div>{faqs.map(([q,a])=><details open><summary>{q}</summary><p>{a}</p></details>)}</div></section></BaseLayout>
