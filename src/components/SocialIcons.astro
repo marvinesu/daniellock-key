@@ -1,0 +1,8 @@
+---
+import { siFacebook, siInstagram, siYoutube, siTiktok, siPinterest, siX, siYelp, siWhatsapp } from 'simple-icons';
+type SocialItem = { label: string; url: string };
+const { items = [] } = Astro.props as { items?: SocialItem[] };
+const paths: Record<string,string> = { Facebook: siFacebook.path, Instagram: siInstagram.path, YouTube: siYoutube.path, TikTok: siTiktok.path, Pinterest: siPinterest.path, X: siX.path, Yelp: siYelp.path, WhatsApp: siWhatsapp.path };
+---
+<div class="social-icon-links" aria-label="Social media">{items.map((item) => <a href={item.url} target="_blank" rel="me noopener" aria-label={`${item.label} (opens in a new tab)`}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={paths[item.label] || paths.Facebook}/></svg><span class="sr-only">{item.label}</span></a>)}</div>
+<style>.social-icon-links{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.1rem}.social-icon-links a{display:grid;place-items:center;width:2.65rem;height:2.65rem;border:1px solid currentColor;border-radius:50%;color:inherit;transition:transform .2s ease,background .2s ease,color .2s ease}.social-icon-links a:hover,.social-icon-links a:focus-visible{transform:translateY(-3px) rotate(-4deg);background:#fdc500;color:#00296b}.social-icon-links svg{width:1.15rem;height:1.15rem;fill:currentColor}@media(prefers-reduced-motion:reduce){.social-icon-links a{transition:none}.social-icon-links a:hover{transform:none}}</style>
