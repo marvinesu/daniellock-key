@@ -1,0 +1,111 @@
+---
+import 'leaflet/dist/leaflet.css';
+
+export type MapPoint = { lat:number; lng:number; label:string; description?:string };
+interface Props {
+  id?:string;
+  eyebrow?:string;
+  title:string;
+  description:string;
+  center:[number,number];
+  zoom?:number;
+  points?:MapPoint[];
+  radiusMeters?:number;
+  nationwide?:boolean;
+  compact?:boolean;
+  actionHref?:string;
+  actionLabel?:string;
+  accent?:string;
+  ink?:string;
+}
+
+const {
+  id='service-map', eyebrow='Interactive service map', title, description, center,
+  zoom=11, points=[], radiusMeters, nationwide=false, compact=false, actionHref, actionLabel='Open map',
+  accent='#fdc500', ink='#00296b'
+}=Astro.props;
+const config={center,zoom,points,radiusMeters,nationwide};
+---
+
+<section class:list={['leaflet-map-section',compact&&'is-compact']} style={`--map-accent:${accent};--map-ink:${ink}`} aria-labelledby={`${id}-title`}>
+  <div class="leaflet-map-copy">
+    <p class="leaflet-map-eyebrow">{eyebrow}</p>
+    <h2 id={`${id}-title`}>{title}</h2>
+    <p>{description}</p>
+    {actionHref&&<a class="leaflet-map-action" href={actionHref} target="_blank" rel="noopener">{actionLabel}<span aria-hidden="true">↗</span></a>}
+  </div>
+  <div class="leaflet-map-stage">
+    <div id={id} class="leaflet-map-canvas" data-leaflet-map data-map-config={JSON.stringify(config)} role="region" aria-label={`Interactive map: ${title}`}></div>
+    <p class="leaflet-map-help">Use the + and − controls to zoom. Drag or use arrow keys to move the map.</p>
+    <noscript><p class="leaflet-map-help">JavaScript is required for the interactive map. The service-area details remain available on this page.</p></noscript>
+  </div>
+</section>
+
+<script>
+  import L from 'leaflet';
+
+  type MapConfig={center:[number,number];zoom:number;points:{lat:number;lng:number;label:string;description?:string}[];radiusMeters?:number;nationwide?:boolean};
+
+  const initLeafletMaps=()=>{
+    document.querySelectorAll<HTMLElement>('[data-leaflet-map]').forEach((element)=>{
+      if(element.dataset.mapReady==='true') return;
+      const raw=element.dataset.mapConfig;
+      if(!raw) return;
+      const config=JSON.parse(raw) as MapConfig;
+      element.dataset.mapReady='true';
+      const map=L.map(element,{center:config.center,zoom:config.zoom,scrollWheelZoom:false,keyboard:true,zoomControl:true});
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        maxZoom:19,
+        attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      map.attributionControl.setPrefix(false);
+
+      if(config.nationwide){
+        const bounds=L.latLngBounds([[24.4,-124.8],[49.4,-66.9]]);
+        L.rectangle(bounds,{color:'#c89320',weight:2,fillColor:'#ffd369',fillOpacity:.14,dashArray:'7 7'}).addTo(map);
+        map.fitBounds(bounds,{padding:[18,18]});
+      }
+      if(config.radiusMeters){
+        L.circle(config.center,{radius:config.radiusMeters,color:'#b91c1c',weight:2,fillColor:'#fdc500',fillOpacity:.16,dashArray:'7 7'}).addTo(map);
+      }
+
+      const icon=L.divIcon({className:'custom-map-pin',html:'<span aria-hidden="true"></span>',iconSize:[30,38],iconAnchor:[15,38],popupAnchor:[0,-35]});
+      config.points.forEach((point)=>{
+        const popup=document.createElement('div');
+        popup.className='map-popup';
+        const heading=document.createElement('strong');
+        heading.textContent=point.label;
+        popup.append(heading);
+        if(point.description){const text=document.createElement('p');text.textContent=point.description;popup.append(text)}
+        L.marker([point.lat,point.lng],{icon,title:point.label,keyboard:true}).addTo(map).bindPopup(popup);
+      });
+      requestAnimationFrame(()=>map.invalidateSize());
+    });
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initLeafletMaps,{once:true}); else initLeafletMaps();
+  document.addEventListener('astro:page-load',initLeafletMaps);
+</script>
+
+<style>
+  .leaflet-map-section{display:grid;grid-template-columns:minmax(240px,.72fr) minmax(0,1.4fr);gap:clamp(1.25rem,4vw,4rem);align-items:center;margin:clamp(2rem,5vw,5rem) auto;padding:clamp(1.25rem,3vw,2.5rem);background:linear-gradient(135deg,color-mix(in srgb,var(--map-ink) 96%,#000),var(--map-ink));color:#fff;border-radius:1.5rem;overflow:hidden}
+  .leaflet-map-copy h2{margin:.35rem 0 1rem;color:#fff;font-size:clamp(2rem,4vw,3.7rem);line-height:1.02}
+  .leaflet-map-copy>p:not(.leaflet-map-eyebrow){color:rgba(255,255,255,.78);line-height:1.7}
+  .leaflet-map-eyebrow{margin:0;color:var(--map-accent);font-size:.76rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+  .leaflet-map-action{display:inline-flex;gap:.55rem;align-items:center;margin-top:1rem;padding:.85rem 1rem;background:var(--map-accent);color:#111;font-weight:800;text-decoration:none;border-radius:999px}
+  .leaflet-map-action:hover,.leaflet-map-action:focus-visible{transform:translateY(-2px)}
+  .leaflet-map-stage{min-width:0}
+  .leaflet-map-canvas{height:clamp(380px,48vw,560px);border:4px solid rgba(255,255,255,.14);border-radius:1rem;background:#e6e2d9;box-shadow:0 24px 55px rgba(0,0,0,.28)}
+  .leaflet-map-help{margin:.7rem .3rem 0;color:rgba(255,255,255,.7);font-size:.78rem}
+  .leaflet-map-section.is-compact{display:block;margin:0;padding:.7rem;border-radius:1rem}
+  .leaflet-map-section.is-compact .leaflet-map-copy{display:none}
+  .leaflet-map-section.is-compact .leaflet-map-canvas{height:390px}
+  :global(.custom-map-pin){background:transparent;border:0}
+  :global(.custom-map-pin span){display:block;width:30px;height:30px;background:var(--map-accent,#fdc500);border:4px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  :global(.map-popup strong){display:block;color:#111;font-size:1rem}
+  :global(.map-popup p){margin:.35rem 0 0;color:#444;line-height:1.45}
+  :global(.leaflet-control-zoom a){color:#111!important}
+  @media(max-width:760px){.leaflet-map-section{grid-template-columns:1fr;border-radius:1rem}.leaflet-map-canvas{height:420px}}
+  @media(max-width:420px){.leaflet-map-section{padding:1rem}.leaflet-map-canvas{height:360px}}
+  @media(prefers-reduced-motion:reduce){.leaflet-map-action{transition:none}}
+</style>
+
