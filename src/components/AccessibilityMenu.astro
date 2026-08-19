@@ -146,28 +146,28 @@
 
 <style is:global>
   .a11y-toolbar{position:fixed;left:20px;bottom:20px;z-index:150;font-family:Arial,Helvetica,sans-serif;line-height:1.4}
-  .a11y-trigger{width:56px;height:56px;display:grid;place-items:center;padding:0;border:2px solid #fff;border-radius:50%;color:#fff;background:#003f88;box-shadow:0 12px 34px rgba(0,41,107,.34);cursor:pointer}
+  .a11y-trigger{width:56px;height:56px;display:grid;place-items:center;padding:0;border:2px solid #eee;border-radius:50%;color:#ffd369;background:#222831;box-shadow:0 12px 34px rgba(34,40,49,.36);cursor:pointer}
   .a11y-trigger svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-  .a11y-panel{position:absolute;left:0;bottom:68px;width:min(360px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 105px));overflow:auto;padding:0;border:1px solid rgba(0,41,107,.2);border-radius:18px;color:#172033;background:#fff;box-shadow:0 24px 75px rgba(0,26,70,.28)}
+  .a11y-panel{position:absolute;left:0;bottom:68px;width:min(360px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 105px));overflow:auto;padding:0;border:1px solid rgba(57,62,70,.28);border-radius:18px;color:#222831;background:#eee;box-shadow:0 24px 75px rgba(34,40,49,.3)}
   .a11y-panel[hidden]{display:none!important}
-  .a11y-panel header{position:static!important;display:flex!important;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.15rem 1.15rem 1rem;color:#fff;background:#00296b!important;box-shadow:none!important}
-  .a11y-panel header span{display:block;margin-bottom:.2rem;color:#ffd500;font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-  .a11y-panel h2{margin:0!important;color:#fff!important;font:700 1.25rem/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:0!important}
-  .a11y-close{width:36px;height:36px;flex:0 0 auto;border:1px solid rgba(255,255,255,.75);border-radius:50%;color:#fff;background:transparent;font:400 1.5rem/1 Arial,sans-serif;cursor:pointer}
-  .a11y-intro{margin:0;padding:1rem 1.15rem .8rem;color:#475569;font-size:.88rem}
+  .a11y-panel header{position:static!important;display:flex!important;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.15rem 1.15rem 1rem;color:#eee;background:#222831!important;box-shadow:none!important}
+  .a11y-panel header span{display:block;margin-bottom:.2rem;color:#ffd369;font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+  .a11y-panel h2{margin:0!important;color:#eee!important;font:700 1.25rem/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:0!important}
+  .a11y-close{width:36px;height:36px;flex:0 0 auto;border:1px solid #eee;border-radius:50%;color:#eee;background:#393e46;font:400 1.5rem/1 Arial,sans-serif;cursor:pointer}
+  .a11y-intro{margin:0;padding:1rem 1.15rem .8rem;color:#393e46;font-size:.88rem}
   .a11y-options{display:grid;padding:0 .8rem}
-  .a11y-options>button{display:grid;grid-template-columns:42px minmax(0,1fr) 38px;align-items:center;gap:.7rem;min-height:68px;padding:.65rem .35rem;border:0;border-top:1px solid #dbe3ef;color:#172033;background:#fff;text-align:left;cursor:pointer}
-  .a11y-option-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;color:#00296b;background:#edf4ff;font-weight:800}
+  .a11y-options>button{display:grid;grid-template-columns:42px minmax(0,1fr) 38px;align-items:center;gap:.7rem;min-height:68px;padding:.65rem .35rem;border:0;border-top:1px solid rgba(57,62,70,.2);color:#222831;background:#eee;text-align:left;cursor:pointer}
+  .a11y-option-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;color:#eee;background:#393e46;font-weight:800}
   .contrast-icon{font-size:1.45rem}
   .a11y-options strong,.a11y-options small{display:block}
-  .a11y-options strong{font-size:.92rem}.a11y-options small{margin-top:.15rem;color:#64748b;font-size:.75rem}
-  .a11y-options i{position:relative;width:36px;height:20px;border-radius:999px;background:#cbd5e1;transition:background .2s}
-  .a11y-options i::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .2s}
-  .a11y-options button[aria-pressed="true"] i{background:#00509d}.a11y-options button[aria-pressed="true"] i::after{transform:translateX(16px)}
-  .a11y-options button[aria-pressed="true"] .a11y-option-icon{color:#00296b;background:#ffd500}
-  .a11y-reset{width:calc(100% - 1.6rem);margin:.9rem .8rem .35rem;padding:.75rem;border:1px solid #00509d;border-radius:999px;color:#00296b;background:#fff;font-weight:800;cursor:pointer}
-  .a11y-status{min-height:1.4rem;margin:.25rem 1rem .8rem;color:#334155;font-size:.75rem;text-align:center}
-  .a11y-trigger:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #ffd500!important;outline-offset:3px}
+  .a11y-options strong{font-size:.92rem}.a11y-options small{margin-top:.15rem;color:#393e46;font-size:.75rem}
+  .a11y-options i{position:relative;width:36px;height:20px;border-radius:999px;background:#393e46;transition:background .2s}
+  .a11y-options i::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#eee;box-shadow:0 1px 4px rgba(34,40,49,.3);transition:transform .2s}
+  .a11y-options button[aria-pressed="true"] i{background:#ffd369}.a11y-options button[aria-pressed="true"] i::after{background:#222831;transform:translateX(16px)}
+  .a11y-options button[aria-pressed="true"] .a11y-option-icon{color:#222831;background:#ffd369}
+  .a11y-reset{width:calc(100% - 1.6rem);margin:.9rem .8rem .35rem;padding:.75rem;border:1px solid #393e46;border-radius:999px;color:#eee;background:#393e46;font-weight:800;cursor:pointer}
+  .a11y-status{min-height:1.4rem;margin:.25rem 1rem .8rem;color:#393e46;font-size:.75rem;text-align:center}
+  .a11y-trigger:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #ffd369!important;outline-offset:3px}
   html.a11y-large-text{font-size:115%!important}
   html.a11y-high-contrast{filter:contrast(150%) brightness(95%);background-color:#000!important;color:#fff!important}
   html.a11y-readable-font *{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.05em!important;line-height:1.7!important}
