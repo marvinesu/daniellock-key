@@ -6,7 +6,7 @@
     </svg>
   </button>
 
-  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+  <dialog class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-title">
     <header>
       <div><span>Display preferences</span><h2 id="a11y-title">Accessibility settings</h2></div>
       <button class="a11y-close" type="button" aria-label="Close accessibility settings">×</button>
@@ -21,7 +21,7 @@
     </div>
     <button class="a11y-reset" type="button">Reset all settings</button>
     <p class="a11y-status" aria-live="polite" aria-atomic="true"></p>
-  </section>
+  </dialog>
 </div>
 
 <script is:inline>
@@ -78,19 +78,29 @@
       };
       const setOpen = (open) => {
         if (!trigger || !panel) return;
-        trigger.setAttribute('aria-expanded', String(open));
-        panel.hidden = !open;
-        root.classList.toggle('is-open', open);
-        if (open) {
+        if (open && !panel.open) {
           lastFocus = document.activeElement;
+          panel.showModal();
+          trigger.setAttribute('aria-expanded', 'true');
+          root.classList.add('is-open');
           (close || toggles[0])?.focus();
-        } else {
-          (lastFocus instanceof HTMLElement ? lastFocus : trigger).focus();
+        } else if (!open && panel.open) {
+          panel.close();
         }
       };
 
       trigger?.addEventListener('click', () => setOpen(trigger.getAttribute('aria-expanded') !== 'true'));
       close?.addEventListener('click', () => setOpen(false));
+      panel?.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        setOpen(false);
+      });
+      panel?.addEventListener('click', (event) => { if (event.target === panel) setOpen(false); });
+      panel?.addEventListener('close', () => {
+        trigger?.setAttribute('aria-expanded', 'false');
+        root.classList.remove('is-open');
+        (lastFocus instanceof HTMLElement ? lastFocus : trigger)?.focus();
+      });
       toggles.forEach((button) => button.addEventListener('click', () => {
         const state = read();
         const key = button.dataset.a11yFeature;
@@ -105,27 +115,6 @@
         apply({});
         sync();
         setStatus('All accessibility settings reset.');
-      });
-      root.addEventListener('keydown', (event) => {
-        if (panel?.hidden) return;
-        if (event.key === 'Escape') {
-          event.preventDefault();
-          event.stopPropagation();
-          setOpen(false);
-          return;
-        }
-        if (event.key !== 'Tab') return;
-        const focusable = [...panel.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')];
-        if (!focusable.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
       });
       sync();
     });
@@ -148,8 +137,9 @@
   .a11y-toolbar{position:fixed;left:20px;bottom:20px;z-index:150;font-family:Arial,Helvetica,sans-serif;line-height:1.4}
   .a11y-trigger{width:56px;height:56px;display:grid;place-items:center;padding:0;border:2px solid #eee;border-radius:50%;color:#ffd369;background:#222831;box-shadow:0 12px 34px rgba(34,40,49,.36);cursor:pointer}
   .a11y-trigger svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-  .a11y-panel{position:absolute;left:0;bottom:68px;width:min(360px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 105px));overflow:auto;padding:0;border:1px solid rgba(57,62,70,.28);border-radius:18px;color:#222831;background:#eee;box-shadow:0 24px 75px rgba(34,40,49,.3)}
-  .a11y-panel[hidden]{display:none!important}
+  .a11y-panel{position:fixed;inset:auto auto 88px 20px;width:min(360px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 120px));overflow:auto;margin:0;padding:0;border:1px solid rgba(57,62,70,.28);border-radius:18px;color:#222831;background:#eee;box-shadow:0 24px 75px rgba(34,40,49,.3)}
+  .a11y-panel:not([open]){display:none!important}
+  .a11y-panel::backdrop{background:rgba(0,41,107,.38);backdrop-filter:blur(2px)}
   .a11y-panel header{position:static!important;display:flex!important;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.15rem 1.15rem 1rem;color:#eee;background:#222831!important;box-shadow:none!important}
   .a11y-panel header span{display:block;margin-bottom:.2rem;color:#ffd369;font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
   .a11y-panel h2{margin:0!important;color:#eee!important;font:700 1.25rem/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:0!important}
@@ -169,10 +159,15 @@
   .a11y-status{min-height:1.4rem;margin:.25rem 1rem .8rem;color:#393e46;font-size:.75rem;text-align:center}
   .a11y-trigger:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #ffd369!important;outline-offset:3px}
   html.a11y-large-text{font-size:115%!important}
-  html.a11y-high-contrast{filter:contrast(150%) brightness(95%);background-color:#000!important;color:#fff!important}
+  html.a11y-high-contrast{--ink:#000!important;--paper:#fff!important;--white:#fff!important;--coral:#ffd500!important;--gold:#ffd500!important;--sage:#fff!important;--line:#000!important;--navy:#000!important;--blue:#000!important;--azure:#000!important;--yellow:#ffd500!important;background:#fff!important;color:#000!important}
+  html.a11y-high-contrast body{color:#000!important;background:#fff!important}
+  html.a11y-high-contrast :where(.notice,.dark,footer){color:#fff!important;background:#000!important}
+  html.a11y-high-contrast :where(.notice,.dark,footer) :where(a,p,h1,h2,h3,span,strong){color:inherit!important}
+  html.a11y-high-contrast :where(header,.request,.situation,.page-hero,input,select,textarea,.a11y-panel){color:#000!important;background:#fff!important;border-color:#000!important}
+  html.a11y-high-contrast :where(a,button,input,select,textarea):focus-visible{outline:3px solid #ffd500!important;outline-offset:3px!important}
   html.a11y-readable-font *{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.05em!important;line-height:1.7!important}
   html.a11y-highlight-links a{text-decoration:underline 3px solid #f59e0b!important;text-underline-offset:4px!important;background-color:rgba(245,158,11,.15)!important}
   html.a11y-reduce-motion *,html.a11y-reduce-motion *::before,html.a11y-reduce-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  @media(max-width:800px){.a11y-toolbar{left:14px;bottom:88px}.a11y-panel{bottom:64px;max-height:calc(100vh - 180px)}.a11y-trigger{width:52px;height:52px}}
+  @media(max-width:800px){.a11y-toolbar{left:14px;bottom:88px}.a11y-panel{inset:auto 14px 152px 14px;width:auto;max-height:calc(100vh - 180px)}.a11y-trigger{width:52px;height:52px}}
   @media(prefers-reduced-motion:reduce){.a11y-options i,.a11y-options i::after{transition:none}}
 </style>

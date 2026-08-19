@@ -8,10 +8,16 @@ describe('custom accessibility toolbar', () => {
   it('provides the dialog trigger, controls, and keyboard behavior', () => {
     expect(component).toContain('aria-haspopup="dialog"');
     expect(component).toContain('aria-controls="a11y-panel"');
-    expect(component).toContain('role="dialog"');
-    expect(component).toContain("event.key === 'Escape'");
-    expect(component).toContain("event.key !== 'Tab'");
+    expect(component).toContain('<dialog');
+    expect(component).toContain('aria-modal="true"');
+    expect(component).toContain("panel.showModal()");
+    expect(component).toContain("panel?.addEventListener('cancel'");
     expect(component).toContain('Reset all settings');
+  });
+
+  it('uses token-based high contrast instead of a page filter', () => {
+    expect(component).not.toMatch(/a11y-high-contrast\{filter:/);
+    expect(component).toContain('--ink:#000');
   });
 
   it('persists every feature under one key and supports Astro navigation', () => {
