@@ -21,6 +21,10 @@ describe('custom accessibility toolbar', () => {
   });
 
   it('persists every feature under one key and supports Astro navigation', () => {
+    expect(component).toContain('a11y-universal-ring');
+    expect(component).toContain('right:18px;top:50%');
+    expect(component).toContain('width:64px;height:64px');
+    expect(component).toContain('width:44px;height:44px');
     expect(component).toContain("const KEY = 'a11y-preferences'");
     expect(component).toContain("document.addEventListener('DOMContentLoaded'");
     expect(component).toContain("document.addEventListener('astro:page-load'");

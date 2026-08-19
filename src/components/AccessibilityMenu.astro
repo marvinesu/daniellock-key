@@ -1,8 +1,9 @@
 <div class="a11y-toolbar" data-a11y-menu>
   <button class="a11y-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11y-panel" aria-label="Open accessibility settings">
-    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <circle cx="16" cy="5.5" r="3.2"></circle>
-      <path d="M6 11.5c3.2 1.4 6.6 2.1 10 2.1s6.8-.7 10-2.1M16 9v17M16 16l-7 11M16 16l7 11"></path>
+    <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <circle class="a11y-universal-ring" cx="24" cy="24" r="20"></circle>
+      <circle class="a11y-universal-head" cx="24" cy="13" r="3.2"></circle>
+      <path d="M13.5 19.5c3.4 1.7 6.9 2.5 10.5 2.5s7.1-.8 10.5-2.5M24 19v10M24 27l-7 10M24 27l7 10"></path>
     </svg>
   </button>
 
@@ -168,6 +169,11 @@
   html.a11y-readable-font *{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:.05em!important;line-height:1.7!important}
   html.a11y-highlight-links a{text-decoration:underline 3px solid #f59e0b!important;text-underline-offset:4px!important;background-color:rgba(245,158,11,.15)!important}
   html.a11y-reduce-motion *,html.a11y-reduce-motion *::before,html.a11y-reduce-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  @media(max-width:800px){.a11y-toolbar{left:14px;bottom:88px}.a11y-panel{inset:auto 14px 152px 14px;width:auto;max-height:calc(100vh - 180px)}.a11y-trigger{width:52px;height:52px}}
+  .a11y-toolbar{left:auto;right:18px;top:50%;bottom:auto;transform:translateY(-50%)}
+  .a11y-trigger{width:64px;height:64px}
+  .a11y-trigger svg{width:42px;height:42px;stroke-width:2.5}
+  .a11y-trigger .a11y-universal-head{fill:currentColor;stroke:none}
+  .a11y-panel{inset:50% 96px auto auto;width:min(360px,calc(100vw - 116px));max-height:min(650px,calc(100vh - 40px));transform:translateY(-50%)}
+  @media(max-width:800px){.a11y-toolbar{right:8px;top:50%}.a11y-panel{inset:50% 60px auto 10px;width:auto;max-height:calc(100vh - 32px);transform:translateY(-50%)}.a11y-trigger{width:44px;height:44px;border-width:1.5px}.a11y-trigger svg{width:30px;height:30px}}
   @media(prefers-reduced-motion:reduce){.a11y-options i,.a11y-options i::after{transition:none}}
 </style>
