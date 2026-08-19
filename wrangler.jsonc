@@ -3,6 +3,7 @@
   "name":"daniels-lock-key-preview",
   "main":"worker/index.ts",
   "compatibility_date":"2026-08-17",
+  "preview_urls":true,
   "routes":[{"pattern":"daniels.webxni.com","custom_domain":true}],
   "assets":{"directory":"./dist","binding":"ASSETS","run_worker_first":true},
   "observability":{"enabled":true},"send_email":[{"name":"EMAIL","destination_address":"marvin@webxni.com","allowed_sender_addresses":["website-leads@webxni.com"]}]
