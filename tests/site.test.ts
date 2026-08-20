@@ -11,7 +11,7 @@ describe("Daniel's Lock & Key release contract",()=>{
  it('keeps call access and license disclosure in the shell',()=>{const s=read('src/layouts/BaseLayout.astro');expect(s.match(/tel:\$\{site\.phoneHref\}/g)?.length).toBeGreaterThanOrEqual(4);expect(s).toMatch(/site\.license/)});
  it('ships a single accessible call-first floating action without chat',()=>{const s=read('src/layouts/BaseLayout.astro');expect(s).toContain('class="floating-call"');expect(s).toMatch(/aria-label=\{`Call Daniel/);expect(s).not.toContain('data-assistant')});
  it('requires consent and protects sensitive data',()=>{const s=read('src/components/LeadForm.astro');expect(s).toMatch(/name="consent" required/);expect(s).toMatch(/identity documents/i)});
- it('uses validated Cloudflare email delivery',()=>{const s=read('worker/index.ts');expect(s).toMatch(/Origin not allowed/);expect(s).toMatch(/Request too large/);expect(s).toMatch(/env\.EMAIL/);expect(read('wrangler.jsonc')).toContain('marvin@webxni.com')});
+ it('uses validated Cloudflare email delivery',()=>{const s=read('worker/index.ts');expect(s).toMatch(/Origin not allowed/);expect(s).toMatch(/Request too large/);expect(s).toMatch(/env\.EMAIL/);expect(s).toContain("'x-robots-tag':'noindex, nofollow'");expect(read('wrangler.jsonc')).toContain('emarketwizdigit@gmail.com')});
  it('keeps preview pages out of search',()=>expect(read('worker/index.ts')).toContain('noindex,nofollow'));
  it('includes substantial responsive photography',()=>['locksmith-hero.webp','locksmith-square.webp','locksmith-mobile.webp'].forEach(p=>expect(statSync(new URL(`../public/images/${p}`,import.meta.url)).size).toBeGreaterThan(30000)));
 });
