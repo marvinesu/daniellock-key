@@ -1,4 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';import {faqs} from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { expandedFaqs } from '../data/faq-expanded';
 ---
-<BaseLayout title="Hollywood Locksmith FAQ | Daniel's Lock & Key" description="Plain answers about Hollywood lockouts, proof of access, rekeying, repairs, service areas, and vehicle-service limits."><section class="page-hero"><div class="shell"><p class="kicker">Useful before you call</p><h1>Locksmith questions, answered plainly.</h1></div></section><section class="section shell faq full"><div></div><div>{faqs.map(([q,a])=><details open><summary>{q}</summary><p>{a}</p></details>)}</div></section></BaseLayout>
+<BaseLayout title="Hollywood Locksmith FAQ | Daniel's Lock & Key" description="30 plain answers about Hollywood lockouts, rekeying, repairs, landlord service, authorization, pricing, coverage, and vehicle-entry limits.">
+  <section class="page-hero"><div class="shell"><p class="kicker">30 useful answers before you call</p><h1>Locksmith questions, answered by an owner-operated service.</h1><p class="lede">Review service scope, authorization, preparation, and next steps. Call to confirm the exact address and current availability.</p></div></section>
+  <section class="section shell faq full"><div><p class="kicker">Frequently asked questions</p><h2>Choose a question</h2></div><div>{expandedFaqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+</BaseLayout>
