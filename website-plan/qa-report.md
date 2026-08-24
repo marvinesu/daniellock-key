@@ -14,3 +14,7 @@ Verified 2026-08-19 on commit `7186a27` and deployed version `3e16a096-5bb0-437d
 - Clearly labelled synthetic preview and production requests both returned `200 {"ok":true}` after exact-version promotion. This verifies Worker acceptance and Email Routing handoff; final inbox placement was not independently opened in this release check.
 - API responses now include `X-Robots-Tag: noindex, nofollow` as well as the temporary website hostname.
 - The Worker uses Cloudflare's native Rate Limit binding at four validated submissions per minute, keyed to a SHA-256 phone digest. Invalid requests do not consume the limit; a rejected valid lead returns 429 with `Retry-After: 60` and never calls Email Service.
+
+## Production search QA
+
+Final production evidence is recorded in [post-launch-seo.md](post-launch-seo.md) and [google-search-audit.md](google-search-audit.md).
