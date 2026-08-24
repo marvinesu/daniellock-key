@@ -192,3 +192,71 @@
   .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
   .menu,.menu-button{width:52px!important;min-width:52px!important;height:52px!important;min-height:52px!important;padding:0!important;font-size:0!important;line-height:0!important}
 </style>
+
+<script is:inline>
+(() => {
+  const initReferenceMenu = () => {
+    const toggle = document.querySelector('.menu, .menu-button');
+    const nav = document.querySelector('#nav, #site-nav, .nav > nav, .header-inner > nav');
+    if (!(toggle instanceof HTMLButtonElement) || !(nav instanceof HTMLElement)) return;
+    nav.classList.add('locksmith-reference-menu');
+    if (!nav.id) nav.id = 'locksmith-menu';
+    toggle.setAttribute('aria-controls', nav.id);
+    if (!nav.querySelector('.locksmith-menu-head')) {
+      const head = document.createElement('div');
+      head.className = 'locksmith-menu-head';
+      head.innerHTML = '<div><small>24/7 LOCKSMITH HELP</small><strong>How can we help?</strong></div><button type="button" class="locksmith-menu-close" aria-label="Close navigation menu"><i></i><i></i></button>';
+      nav.prepend(head);
+    }
+    const setState = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      nav.classList.toggle('open', open);
+      document.documentElement.classList.toggle('locksmith-menu-open', open);
+    };
+    const closeMenu = (restoreFocus = false) => { setState(false); if (restoreFocus) toggle.focus(); };
+    nav.querySelector('.locksmith-menu-close')?.addEventListener('click', () => closeMenu(true));
+    const emergency = nav.querySelector('.emergency-menu-call');
+    if (emergency) emergency.setAttribute('aria-label', 'Emergency Request. Call ' + (emergency.querySelector('strong')?.textContent || 'now'));
+    if (nav.dataset.referenceMenuReady === 'true') return;
+    nav.dataset.referenceMenuReady = 'true';
+    toggle.addEventListener('click', () => requestAnimationFrame(() => setState(nav.classList.contains('open'))));
+    nav.addEventListener('click', (event) => { const link = event.target.closest('a'); if (link && !link.closest('.nav-submenu, .services-menu')) closeMenu(false); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && nav.classList.contains('open')) closeMenu(true); });
+    matchMedia('(min-width:1101px)').addEventListener('change', (event) => { if (event.matches) closeMenu(false); });
+  };
+  document.addEventListener('astro:page-load', initReferenceMenu);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReferenceMenu, {once:true}); else initReferenceMenu();
+})();
+</script>
+
+<style is:global>
+  .locksmith-menu-head{display:none}
+  .emergency-menu-call{display:inline-flex!important;align-items:center;justify-content:center;gap:.38rem}
+  .emergency-menu-call span,.emergency-menu-call strong{color:inherit;font:inherit}.emergency-menu-call strong{font-weight:900}
+  @media(max-width:1100px){
+    html.locksmith-menu-open{overflow:hidden}
+    .locksmith-reference-menu{position:fixed!important;inset:0!important;z-index:490!important;width:100vw!important;height:100dvh!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr)!important;align-content:start!important;gap:.1rem clamp(1.5rem,5vw,5rem)!important;overflow:auto!important;margin:0!important;padding:clamp(1.25rem,4vw,2.75rem) clamp(1.25rem,6vw,6rem) 2.5rem!important;color:#fff!important;background:radial-gradient(circle at 88% 15%,rgba(255,213,0,.98) 0 7.5rem,transparent 7.65rem),linear-gradient(135deg,#00296b 0%,#003f88 58%,#00509d 100%)!important;box-shadow:none!important;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-105%);transition:transform .62s cubic-bezier(.76,0,.24,1),opacity .3s ease,visibility .62s}
+    .locksmith-reference-menu::after{content:"";position:fixed;right:-7rem;bottom:-9rem;width:22rem;height:22rem;border:1.25rem solid rgba(253,197,0,.18);border-radius:50%;pointer-events:none}
+    .locksmith-reference-menu.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+    .locksmith-menu-head{grid-column:1/-1;display:flex;align-items:flex-start;justify-content:space-between;min-height:clamp(5.5rem,12vw,8rem);margin-bottom:clamp(1rem,4vw,3rem);padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.32)}
+    .locksmith-menu-head small{display:block;margin-bottom:.45rem;color:#ffd500;font-size:.7rem;font-weight:900;letter-spacing:.18em}.locksmith-menu-head strong{display:block;color:#fff;font-size:clamp(1.45rem,3vw,2.8rem);line-height:1}
+    .locksmith-menu-close{position:relative;width:58px;height:58px;flex:0 0 auto;border:1px solid rgba(0,41,107,.65);border-radius:50%;color:#00296b;background:#ffd500;cursor:pointer;transition:transform .25s ease,background .25s ease}.locksmith-menu-close:hover{transform:rotate(8deg) scale(1.05);background:#fff}.locksmith-menu-close i{position:absolute;left:16px;top:27px;width:25px;height:2px;background:currentColor}.locksmith-menu-close i:first-child{transform:rotate(45deg)}.locksmith-menu-close i:last-child{transform:rotate(-45deg)}
+    .locksmith-reference-menu>:is(a,.nav-group,.nav-services){grid-column:1;opacity:0;transform:translateY(22px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}.locksmith-reference-menu.open>:is(a,.nav-group,.nav-services){opacity:1;transform:none}
+    .locksmith-reference-menu.open>:nth-child(2){transition-delay:.12s}.locksmith-reference-menu.open>:nth-child(3){transition-delay:.16s}.locksmith-reference-menu.open>:nth-child(4){transition-delay:.2s}.locksmith-reference-menu.open>:nth-child(5){transition-delay:.24s}.locksmith-reference-menu.open>:nth-child(6){transition-delay:.28s}.locksmith-reference-menu.open>:nth-child(7){transition-delay:.32s}.locksmith-reference-menu.open>:nth-child(8){transition-delay:.36s}.locksmith-reference-menu.open>:nth-child(9){transition-delay:.4s}
+    .locksmith-reference-menu>:is(.nav-group,.nav-services)>:is(.nav-group-trigger,.services-trigger){width:100%;justify-content:space-between}
+    .locksmith-reference-menu>:is(.nav-group,.nav-services)>:is(.nav-group-trigger,.services-trigger),.locksmith-reference-menu>a:not(.emergency-menu-call){min-height:clamp(3.1rem,6.5vw,4.75rem)!important;padding:.45rem 0!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.2)!important;border-radius:0!important;color:#fff!important;background:transparent!important;font-size:clamp(1.45rem,3.7vw,3.1rem)!important;font-weight:800!important;line-height:1.05!important;text-align:left!important;text-decoration:none!important}
+    .locksmith-reference-menu>a:not(.emergency-menu-call):hover,.locksmith-reference-menu :is(.nav-group-trigger,.services-trigger):hover{color:#ffd500!important;padding-left:.45rem!important}
+    .locksmith-reference-menu :is(.nav-submenu,.services-menu){position:static!important;min-width:0!important;max-height:34vh;overflow:auto;margin:.25rem 0 .75rem!important;padding:.45rem!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:12px!important;background:rgba(0,20,58,.45)!important;box-shadow:none!important}
+    .locksmith-reference-menu :is(.nav-submenu,.services-menu) a{min-height:0!important;padding:.55rem .7rem!important;border:0!important;color:#fff!important;background:transparent!important;font-size:.94rem!important;line-height:1.25!important}.locksmith-reference-menu :is(.nav-submenu,.services-menu) a:hover{color:#00296b!important;background:#ffd500!important}
+    .locksmith-reference-menu .emergency-menu-call{grid-column:2!important;grid-row:2/span 7;align-self:stretch;min-height:clamp(220px,45vh,430px)!important;display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:.7rem!important;padding:clamp(1.4rem,4vw,3rem)!important;border:2px solid #ffd500!important;border-radius:1.5rem!important;color:#fff!important;background:linear-gradient(145deg,#d7192d,#b60f22)!important;box-shadow:0 24px 70px rgba(0,0,0,.28);font-size:clamp(1.2rem,2.4vw,2rem)!important;text-align:left!important;text-decoration:none!important}
+    .locksmith-reference-menu .emergency-menu-call::before{content:"☎";display:grid;place-items:center;width:64px;height:64px;border-radius:50%;color:#00296b;background:#ffd500;font-size:1.8rem}.locksmith-reference-menu .emergency-menu-call span{font-size:.72em;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.locksmith-reference-menu .emergency-menu-call strong{font-size:1.25em}.locksmith-reference-menu .emergency-menu-call:hover{background:linear-gradient(145deg,#e51a30,#c51125)!important;transform:translateY(-4px)}
+  }
+  @media(max-width:700px){
+    .locksmith-reference-menu{grid-template-columns:1fr!important;padding:1rem 1rem 6rem!important;background:radial-gradient(circle at 88% 7%,rgba(255,213,0,.98) 0 4.25rem,transparent 4.35rem),linear-gradient(145deg,#00296b,#003f88 70%,#00509d)!important}
+    .locksmith-menu-head{min-height:4.7rem;margin-bottom:.65rem}.locksmith-menu-head strong{font-size:1.4rem}.locksmith-menu-close{width:48px;height:48px}.locksmith-menu-close i{left:13px;top:22px;width:21px}
+    .locksmith-reference-menu>:is(a,.nav-group,.nav-services){grid-column:1!important}.locksmith-reference-menu>:is(.nav-group,.nav-services)>:is(.nav-group-trigger,.services-trigger),.locksmith-reference-menu>a:not(.emergency-menu-call){min-height:3.25rem!important;font-size:clamp(1.35rem,7vw,2rem)!important}
+    .locksmith-reference-menu .emergency-menu-call{grid-column:1!important;grid-row:auto!important;min-height:126px!important;margin-top:1rem!important;padding:1rem 1.2rem!important;border-radius:1rem!important}.locksmith-reference-menu .emergency-menu-call::before{width:44px;height:44px;font-size:1.2rem}
+  }
+  @media(prefers-reduced-motion:reduce){.locksmith-reference-menu,.locksmith-reference-menu>*{transition:none!important}}
+</style>
