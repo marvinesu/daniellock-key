@@ -10,6 +10,10 @@ body{color:#00296b!important;background:#fff!important}.notice,.dark,footer{back
 @media (min-width:1101px){.menu,.menu-button{display:none!important}}
 
 /* Responsive type scale: preserve hierarchy without oversized titles. */
+main{font-size:1.035rem}
+main :is(.micro,.small,.fineprint){font-size:.88rem!important;line-height:1.6}
+header :is(.notice,.utility-bar),header nav :is(a,button){text-transform:uppercase;letter-spacing:.045em}
+header :is(.notice,.utility-bar){font-size:.82rem}
 main h1{font-size:clamp(2.85rem,5.25vw,5.1rem)!important;line-height:1!important}
 main h2{font-size:clamp(2rem,3.75vw,3.75rem)!important;line-height:1.04!important}
 @media(max-width:700px){
