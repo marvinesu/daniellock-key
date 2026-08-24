@@ -4,7 +4,7 @@
   "main":"worker/index.ts",
   "compatibility_date":"2026-08-17",
   "preview_urls":true,
-  "routes":[{"pattern":"daniels.webxni.com","custom_domain":true}],
+  "routes":[{"pattern":"danielslockkey.com","custom_domain":true},{"pattern":"www.danielslockkey.com","custom_domain":true},{"pattern":"daniels.webxni.com","custom_domain":true}],
   "assets":{"directory":"./dist","binding":"ASSETS","run_worker_first":true},
   "observability":{"enabled":true},"send_email":[{"name":"EMAIL","destination_address":"emarketwizdigit@gmail.com","allowed_sender_addresses":["website-leads@webxni.com"]}],"ratelimits":[{"name":"LEAD_RATE_LIMITER","namespace_id":"26081905","simple":{"limit":4,"period":60}}]
 }
