@@ -1,0 +1,37 @@
+---
+import { site } from '../data/site';
+const displayPhone = 'phoneDisplay' in site ? site.phoneDisplay : site.phone;
+---
+<dialog class="booking-offer" data-booking-offer aria-labelledby="booking-offer-title" aria-describedby="booking-offer-copy">
+  <button class="booking-offer-close" type="button" aria-label="Close promotional offer">×</button>
+  <div class="booking-offer-badge" aria-hidden="true"><strong>10%</strong><span>OFF</span></div>
+  <div>
+    <p class="booking-offer-kicker">Limited booking offer</p>
+    <h2 id="booking-offer-title">Call and book now to save 10%</h2>
+    <p id="booking-offer-copy">Call now and mention this website offer when you book your locksmith appointment.</p>
+    <a class="booking-offer-call" href={`tel:${site.phoneHref}`} aria-label={`Call ${site.name} at ${displayPhone} and claim the 10 percent offer`}><span aria-hidden="true">☎</span> Call {displayPhone}</a>
+    <small>10% off service labor for a new booking. Mention the offer when calling. Parts and previously booked work are excluded; other restrictions may apply.</small>
+  </div>
+</dialog>
+<script is:inline>
+(() => {
+  const KEY = 'locksmith-booking-offer-seen';
+  const init = () => {
+    const offer = document.querySelector('[data-booking-offer]');
+    if (!(offer instanceof HTMLDialogElement) || offer.dataset.ready === 'true') return;
+    offer.dataset.ready = 'true';
+    const close = offer.querySelector('.booking-offer-close');
+    const dismiss = () => { if (offer.open) offer.close(); sessionStorage.setItem(KEY, '1'); };
+    close?.addEventListener('click', dismiss);
+    offer.addEventListener('cancel', (event) => { event.preventDefault(); dismiss(); });
+    offer.addEventListener('click', (event) => { if (event.target === offer) dismiss(); });
+    if (sessionStorage.getItem(KEY) !== '1') window.setTimeout(() => { if (!offer.open && sessionStorage.getItem(KEY) !== '1') { offer.showModal(); close?.focus(); } }, 10000);
+  };
+  document.addEventListener('DOMContentLoaded', init, { once: true });
+  document.addEventListener('astro:page-load', init);
+})();
+</script>
+<style is:global>
+.booking-offer{width:min(560px,calc(100% - 28px));padding:0;border:0;border-radius:24px;color:#00296b;background:#fff;box-shadow:0 30px 100px rgba(0,41,107,.42);overflow:hidden}.booking-offer[open]{display:grid;grid-template-columns:150px 1fr;animation:offer-in .45s cubic-bezier(.22,1,.36,1)}.booking-offer::backdrop{background:rgba(0,20,55,.64);backdrop-filter:blur(4px)}.booking-offer>div:last-of-type{padding:2.2rem 2rem 1.8rem}.booking-offer-badge{display:grid;place-content:center;text-align:center;color:#00296b;background:linear-gradient(145deg,#ffd500,#fdc500)}.booking-offer-badge strong{font:900 3.25rem/1 Georgia,serif}.booking-offer-badge span{font-weight:900;letter-spacing:.16em}.booking-offer-kicker{margin:0 0 .5rem;color:#00509d;font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.booking-offer h2{margin:0 2rem 1rem 0;font-size:clamp(2rem,5vw,3.1rem);line-height:.95}.booking-offer p{line-height:1.55}.booking-offer-call{display:flex;align-items:center;justify-content:center;gap:.65rem;min-height:54px;margin:1.3rem 0 1rem;padding:.75rem 1rem;border-radius:999px;color:#fff!important;background:#d7192d;text-decoration:none;font-weight:900}.booking-offer-call span{font-size:1.2rem}.booking-offer small{display:block;color:#38547c;line-height:1.45}.booking-offer-close{position:absolute;top:.75rem;right:.75rem;z-index:2;width:40px;height:40px;border:1px solid rgba(0,41,107,.25);border-radius:50%;color:#00296b;background:#fff;font-size:1.5rem;line-height:1;cursor:pointer}@keyframes offer-in{from{opacity:0;transform:translateY(28px) scale(.96)}}@media(max-width:600px){.booking-offer[open]{grid-template-columns:1fr}.booking-offer-badge{min-height:105px}.booking-offer-badge strong{font-size:2.7rem}.booking-offer>div:last-of-type{padding:1.6rem 1.25rem 1.35rem}.booking-offer h2{margin-right:0;font-size:2.15rem}}@media(prefers-reduced-motion:reduce){.booking-offer[open]{animation:none}}
+</style>
+
