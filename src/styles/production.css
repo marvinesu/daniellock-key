@@ -21,3 +21,20 @@ main h2{font-size:clamp(2rem,3.75vw,3.75rem)!important;line-height:1.04!importan
   main h2{font-size:clamp(1.85rem,8.5vw,2.75rem)!important;overflow-wrap:anywhere}
 }
 .trap{display:none!important}
+/* Production visual QA refinements: balanced type, compact rhythm, and clear location cards. */
+main h1{font-size:clamp(2.6rem,4.4vw,4.4rem)!important;line-height:1.03!important;max-width:15ch}
+main h2{font-size:clamp(1.85rem,2.85vw,3.05rem)!important;line-height:1.08!important;max-width:22ch}
+main h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.18}
+.section{padding:clamp(3.75rem,6vw,6rem) 0}
+.page-hero,.local-hero{padding-block:clamp(3.5rem,6vw,5.75rem)!important}
+.areas{grid-template-columns:minmax(0,.82fr) minmax(420px,1.18fr);gap:clamp(2rem,5vw,5rem)}
+.nearby{padding:clamp(3rem,5vw,4.5rem) 0}
+.nearby>.shell>h2{margin-bottom:1.5rem}
+.nearby>.shell>div{grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem}
+.nearby a{min-width:0;min-height:108px;padding:1.15rem;border-radius:1rem;align-content:space-between;text-decoration:none;box-shadow:0 10px 25px rgba(0,41,107,.06);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.nearby a:hover,.nearby a:focus-visible{transform:translateY(-3px);border-color:#00509d;box-shadow:0 16px 32px rgba(0,41,107,.12)}
+.nearby span{display:block;margin-top:.55rem;line-height:1.35}
+.local-service-grid a{min-width:0}
+@media(max-width:900px){.areas{grid-template-columns:1fr}.nearby>.shell>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){main h1{font-size:clamp(2.35rem,10.5vw,3.15rem)!important}main h2{font-size:clamp(1.7rem,7.5vw,2.3rem)!important}.section{padding:3.25rem 0}.page-hero,.local-hero{padding-block:3rem!important}.nearby>.shell>div{grid-template-columns:1fr}.nearby a{min-height:88px}}
+@media(prefers-reduced-motion:reduce){.nearby a{transition:none}}
