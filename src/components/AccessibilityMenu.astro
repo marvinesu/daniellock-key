@@ -234,6 +234,19 @@
   .locksmith-menu-head{display:none}
   .emergency-menu-call{display:inline-flex!important;align-items:center;justify-content:center;gap:.38rem}
   .emergency-menu-call span,.emergency-menu-call strong{color:inherit;font:inherit}.emergency-menu-call strong{font-weight:900}
+  @media(min-width:1101px){
+    .locksmith-reference-menu{gap:clamp(.65rem,1.15vw,1.4rem)!important}
+    .locksmith-reference-menu>a,.locksmith-reference-menu .nav-group-trigger,.locksmith-reference-menu .services-trigger{font-size:clamp(.74rem,.82vw,.88rem)!important;white-space:nowrap}
+    .locksmith-reference-menu .emergency-menu-call{max-width:190px;min-height:54px!important;flex-direction:column;align-items:flex-start;gap:.08rem!important;padding:.55rem 1rem!important;border-radius:999px!important;line-height:1.08!important}
+    .locksmith-reference-menu .emergency-menu-call span{font-size:.66rem!important;letter-spacing:.05em;text-transform:uppercase}
+    .locksmith-reference-menu .emergency-menu-call strong{font-size:.82rem!important;white-space:nowrap}
+  }
+  @media(min-width:1101px) and (max-width:1240px){
+    .locksmith-reference-menu{gap:.62rem!important}
+    .locksmith-reference-menu .emergency-menu-call{max-width:158px;padding-inline:.8rem!important}
+    .locksmith-reference-menu .emergency-menu-call span{font-size:.59rem!important}
+    .locksmith-reference-menu .emergency-menu-call strong{font-size:.74rem!important}
+  }
   @media(max-width:1100px){
     html.locksmith-menu-open{overflow:hidden}
     .locksmith-reference-menu{position:fixed!important;inset:0!important;z-index:490!important;width:100vw!important;height:100dvh!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr)!important;align-content:start!important;gap:.1rem clamp(1.5rem,5vw,5rem)!important;overflow:auto!important;margin:0!important;padding:clamp(1.25rem,4vw,2.75rem) clamp(1.25rem,6vw,6rem) 2.5rem!important;color:#fff!important;background:radial-gradient(circle at 88% 15%,rgba(255,213,0,.98) 0 7.5rem,transparent 7.65rem),linear-gradient(135deg,#00296b 0%,#003f88 58%,#00509d 100%)!important;box-shadow:none!important;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-105%);transition:transform .62s cubic-bezier(.76,0,.24,1),opacity .3s ease,visibility .62s}

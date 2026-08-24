@@ -8,3 +8,11 @@ body{color:#00296b!important;background:#fff!important}.notice,.dark,footer{back
 .floating-call{left:auto!important;right:12px!important;bottom:18px!important;width:auto!important;min-width:0!important;min-height:52px!important;padding:.35rem .8rem .35rem .38rem!important;justify-content:flex-start!important;border-width:2px!important}.floating-call>span:first-child,.floating-call-icon{width:38px!important;height:38px!important;flex:0 0 38px!important}.floating-call strong{font-size:.88rem!important;white-space:nowrap!important}@media(max-width:800px){body{padding-bottom:0!important}.floating-call{left:auto!important;right:8px!important;bottom:12px!important;max-width:calc(100vw - 16px)!important}}
 @media (min-width:801px) and (max-width:1100px){.nav{position:relative}.nav>.menu{display:block!important;flex:none}.nav>nav{position:absolute;top:100%;left:auto;right:0;width:min(390px,calc(100vw - 40px));display:grid!important;gap:.25rem;padding:1rem;background:#fff;border:1px solid rgba(0,41,107,.2);border-radius:0 0 18px 18px;box-shadow:0 24px 50px rgba(0,41,107,.18);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.2s ease}.nav>nav.open{opacity:1;visibility:visible;transform:none}.nav>nav>a,.nav>nav>.nav-group{width:100%;padding:.65rem .75rem}.nav>nav>.pill{margin-top:.35rem}}
 @media (min-width:1101px){.menu,.menu-button{display:none!important}}
+
+/* Responsive type scale: preserve hierarchy without oversized titles. */
+main h1{font-size:clamp(2.85rem,5.25vw,5.1rem)!important;line-height:1!important}
+main h2{font-size:clamp(2rem,3.75vw,3.75rem)!important;line-height:1.04!important}
+@media(max-width:700px){
+  main h1{font-size:clamp(2.45rem,11.5vw,3.55rem)!important;overflow-wrap:anywhere}
+  main h2{font-size:clamp(1.85rem,8.5vw,2.75rem)!important;overflow-wrap:anywhere}
+}
