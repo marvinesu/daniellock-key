@@ -205,7 +205,7 @@
     if (!nav.querySelector('.locksmith-menu-head')) {
       const head = document.createElement('div');
       head.className = 'locksmith-menu-head';
-      head.innerHTML = '<div><small>24/7 LOCKSMITH HELP</small><strong>How can we help?</strong></div><button type="button" class="locksmith-menu-close" aria-label="Close navigation menu"><i></i><i></i></button>';
+      head.innerHTML = '<div><small>LOCKSMITH HELP</small><strong>How can we help?</strong></div><button type="button" class="locksmith-menu-close" aria-label="Close navigation menu"><i></i><i></i></button>';
       nav.prepend(head);
     }
     const setState = (open) => {
@@ -217,7 +217,7 @@
     const closeMenu = (restoreFocus = false) => { setState(false); if (restoreFocus) toggle.focus(); };
     nav.querySelector('.locksmith-menu-close')?.addEventListener('click', () => closeMenu(true));
     const emergency = nav.querySelector('.emergency-menu-call');
-    if (emergency) emergency.setAttribute('aria-label', 'Emergency Request. Call ' + (emergency.querySelector('strong')?.textContent || 'now'));
+    if (emergency) emergency.setAttribute('aria-label', 'Request Service by phone');
     if (nav.dataset.referenceMenuReady === 'true') return;
     nav.dataset.referenceMenuReady = 'true';
     toggle.addEventListener('click', () => requestAnimationFrame(() => setState(nav.classList.contains('open'))));
