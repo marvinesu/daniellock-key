@@ -1,9 +1,14 @@
----
-import LeafletMap from './LeafletMap.astro';
-import { locations } from '../data/locations';
-const lat=locations.reduce((sum,x)=>sum+x.lat,0)/locations.length;
-const lng=locations.reduce((sum,x)=>sum+x.lon,0)/locations.length;
----
-<LeafletMap id="home-coverage-map" eyebrow="Interactive coverage map" title="Explore the listed service communities." description="Pins mark neighborhood centers for orientation, not storefronts or guaranteed dispatch points. Call with the exact address to confirm coverage." center={[lat,lng]} zoom={10} points={locations.map(({lat,lon,name})=>({lat,lng:lon,label:name,description:'Neighborhood-center reference. Exact-address coverage is confirmed by phone.'}))} compact actionHref="/service-areas/" actionLabel="View every service area" />
+<div class="google-location-map">
+  <iframe
+    title="Google Map for Daniel's Lock & Key Service"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d422878.5178079065!2d-118.37795195000001!3d34.101840949999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8678d8d91696c383%3A0x8875ceccca924926!2sDaniel's%20Lock%20%26%20Key%20Service!5e0!3m2!1sen!2sus!4v1788553911873!5m2!1sen!2sus"
+    width="600"
+    height="450"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"
+  ></iframe>
+  <p>Use the Google Business map for orientation. Call with the exact service address to confirm current coverage.</p>
+</div>
 <aside class="home-location-summary"><strong>Business location</strong><h3>Hollywood mobile service area</h3><p>Daniel’s Lock & Key Service operates as an owner-operated mobile locksmith serving Hollywood and approved nearby Los Angeles neighborhoods. Call with the exact address to confirm coverage.</p><a href="/business-information/">View verified business information →</a></aside>
-<style>.home-location-summary{margin-top:1rem;padding:1.2rem;border:1px solid rgba(0,41,107,.18);border-radius:16px;background:#fff}.home-location-summary strong{color:#d7192d;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}.home-location-summary h3{margin:.35rem 0}.home-location-summary p{margin:.4rem 0 1rem}</style>
+<style>.google-location-map{overflow:hidden;border:1px solid rgba(0,41,107,.18);border-radius:18px;background:#00296b}.google-location-map iframe{display:block;width:100%;height:450px;border:0}.google-location-map>p{margin:0;padding:.8rem 1rem;color:#fff;font-size:.82rem}.home-location-summary{margin-top:1rem;padding:1.2rem;border:1px solid rgba(0,41,107,.18);border-radius:16px;background:#fff}.home-location-summary strong{color:#d7192d;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem}.home-location-summary h3{margin:.35rem 0}.home-location-summary p{margin:.4rem 0 1rem}@media(max-width:600px){.google-location-map iframe{height:340px}}</style>
