@@ -13,3 +13,13 @@ The exact version above was inspected on the noindex preview and then promoted a
 
 - [Post-launch SEO audit](post-launch-seo.md)
 - [Google Search audit](google-search-audit.md)
+
+## Google Business map release — 2026-09-04
+
+- Canonical host: `https://danielslockkey.com/`
+- Source commit: `fe20f4a`
+- Production Worker version: `802dd6c5-8d08-4a0e-ae36-3e64f85f84a1`
+- Homepage: supplied Google Business map at intrinsic 600 × 450, responsive at narrow widths.
+- Global footer: supplied Google Business map at intrinsic 400 × 300, responsive at narrow widths.
+- Verification: canonical homepage `200`; `www` permanently redirects to the apex; `robots.txt` and `sitemap-index.xml` return `200`.
+- Live SEO audit: 39 of 39 sitemap pages crawled, zero errors and zero warnings.
