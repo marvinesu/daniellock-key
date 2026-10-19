@@ -78,3 +78,16 @@ main h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.18}
 :is(.pill,.outline,.service-list a,.faq summary):focus-visible{outline:3px solid #ffd500;outline-offset:4px}
 @media(max-width:800px){.professional-showcase{background:linear-gradient(180deg,#fff 0 72%,rgba(255,213,0,.12) 72%)}.professional-showcase-media{padding:0}.professional-showcase-media:before{inset:8% 3% -2% 5%}.request form{padding:1.25rem}.faq details{padding-inline:.75rem}}
 @media(prefers-reduced-motion:reduce){.faq details{transition:none}}
+
+/* Service imagery and final visual-QA type scale. */
+.service-list-with-media article{grid-template-columns:minmax(180px,230px) 48px minmax(0,1fr) auto;gap:1.35rem}
+.service-card-media{display:block;overflow:hidden;border-radius:10px;background:#eaf1f8}
+.service-card-media img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .35s ease}
+.service-list-with-media article:hover .service-card-media img{transform:scale(1.025)}
+main :is(.hero,.page-hero,.local-hero,.location-hero) h1{max-width:18ch!important;font-size:clamp(2.35rem,3.65vw,3.7rem)!important;line-height:1.05!important}
+main h2{font-size:clamp(1.75rem,2.55vw,2.7rem)!important;line-height:1.1!important}
+@media(max-width:800px){.service-list-with-media article{grid-template-columns:44px minmax(0,1fr);gap:1rem}.service-list-with-media .service-card-media{grid-column:1/-1}.service-list-with-media article>a{grid-column:2}main :is(.hero,.page-hero,.local-hero,.location-hero) h1{font-size:clamp(2.05rem,8.4vw,2.85rem)!important;max-width:20ch!important}main h2{font-size:clamp(1.55rem,6.6vw,2.2rem)!important}}
+@media(prefers-reduced-motion:reduce){.service-card-media img{transition:none}}
+.local-service-grid:not(.local-service-grid-with-media) a{overflow:hidden;padding-top:0}
+.local-service-grid:not(.local-service-grid-with-media) a:before{content:"";display:block;width:calc(100% + 2.8rem);margin:0 -1.4rem .55rem;aspect-ratio:16/9;background:center/cover no-repeat url('/images/services/door-hardware-sm.webp')}
+.local-service-grid:not(.local-service-grid-with-media) a:nth-child(1):before{background-image:url('/images/services/bungalow-entry-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(2):before{background-image:url('/images/services/rekeying-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(4):before{background-image:url('/images/services/apartment-entry-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(5):before{background-image:url('/images/services/commercial-storefront-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(6):before{background-image:url('/images/services/car-service-sm.webp')}
