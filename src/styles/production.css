@@ -78,3 +78,6 @@ main h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.18}
 :is(.pill,.outline,.service-list a,.faq summary):focus-visible{outline:3px solid #ffd500;outline-offset:4px}
 @media(max-width:800px){.professional-showcase{background:linear-gradient(180deg,#fff 0 72%,rgba(255,213,0,.12) 72%)}.professional-showcase-media{padding:0}.professional-showcase-media:before{inset:8% 3% -2% 5%}.request form{padding:1.25rem}.faq details{padding-inline:.75rem}}
 @media(prefers-reduced-motion:reduce){.faq details{transition:none}}
+
+/* Keep the mobile call link tappable without obscuring page content. */
+@media(max-width:520px){.floating-call{width:56px!important;height:56px!important;min-height:56px!important;max-width:56px!important;padding:0!important;justify-content:center!important;border-radius:50%!important}.floating-call>span:first-child,.floating-call-icon{width:38px!important;height:38px!important;flex:0 0 38px!important}.floating-call strong{display:none!important}}
