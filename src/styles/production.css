@@ -91,3 +91,14 @@ main h2{font-size:clamp(1.75rem,2.55vw,2.7rem)!important;line-height:1.1!importa
 .local-service-grid:not(.local-service-grid-with-media) a{overflow:hidden;padding-top:0}
 .local-service-grid:not(.local-service-grid-with-media) a:before{content:"";display:block;width:calc(100% + 2.8rem);margin:0 -1.4rem .55rem;aspect-ratio:16/9;background:center/cover no-repeat url('/images/services/door-hardware-sm.webp')}
 .local-service-grid:not(.local-service-grid-with-media) a:nth-child(1):before{background-image:url('/images/services/bungalow-entry-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(2):before{background-image:url('/images/services/rekeying-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(4):before{background-image:url('/images/services/apartment-entry-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(5):before{background-image:url('/images/services/commercial-storefront-sm.webp')}.local-service-grid:not(.local-service-grid-with-media) a:nth-child(6):before{background-image:url('/images/services/car-service-sm.webp')}
+/* Image-led service-detail heroes */
+.service-page-hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr);gap:clamp(2rem,5vw,5rem);align-items:center}
+.service-page-hero-copy{min-width:0}
+.service-page-hero-copy .breadcrumbs{margin-bottom:clamp(1.2rem,2.4vw,2rem)}
+.service-page-hero-media{position:relative;margin:0;min-width:0;overflow:hidden;border:1px solid rgba(0,41,107,.16);border-radius:1.4rem;background:#00296b;box-shadow:0 24px 58px rgba(0,41,107,.18)}
+.service-page-hero-media picture,.service-page-hero-media img{display:block;width:100%}
+.service-page-hero-media img{aspect-ratio:3/2;object-fit:cover}
+.service-page-hero-media figcaption{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:1rem;align-items:end;padding:1rem 1.15rem;color:#fff;background:linear-gradient(transparent,rgba(0,41,107,.94));font-weight:900}
+.service-page-hero-media figcaption small{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;opacity:.82}
+@media(max-width:900px){.service-page-hero-grid{grid-template-columns:1fr}.service-page-hero-media{max-width:720px}.service-page-hero-copy .actions{margin-bottom:.25rem}}
+@media(max-width:520px){.service-page-hero-grid{gap:1.75rem}.service-page-hero-media{border-radius:1rem}.service-page-hero-media figcaption{align-items:start;flex-direction:column;gap:.2rem;padding:.85rem 1rem}}
